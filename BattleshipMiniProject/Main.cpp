@@ -1,6 +1,7 @@
 #include<iostream>
 #include<WS2tcpip.h>
 #pragma comment (lib, "ws2_32.lib")
+#include <SFML/Window.hpp>
 
 using namespace std;
 
