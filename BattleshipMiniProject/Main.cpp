@@ -1,22 +1,24 @@
 #include<iostream>
 #include<WS2tcpip.h>
 #include<Winsock2.h>
+#include<qos.h>
 #pragma comment (lib, "ws2_32.lib")
 
 using namespace std;
 
-void main()
+int main()
 {
+	cerr << "hej" << endl;
 	//initialize winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2); //request version 2,2
 
 	int wsOK = WSAStartup(ver, &wsData);
 
-	if (wsOK = !0)
+	if (wsOK != 0)
 	{
 		cerr << "Cannot initialize winsock, quitting" << endl;
-		return;
+		return 0;
 	}
 
 
@@ -25,7 +27,7 @@ void main()
 	if (listening == INVALID_SOCKET)
 	{
 		cerr << "Cannot create a socket, quitting" << endl;
-		return;
+		return 0;
 	}
 	//bind the ip address and port to a socket
 	sockaddr_in hint;
@@ -49,7 +51,7 @@ void main()
 	if (clientSocket == INVALID_SOCKET)
 	{
 		cerr << "Cannot connect to socket , quitting" << endl;
-		return;
+		return 0;
 	}
 	
 	char host[NI_MAXHOST];		//client's remote name, if not available IP will be used
@@ -103,4 +105,5 @@ void main()
 
 	//clean up winsock
 	WSACleanup();
+	return 0;
 }
