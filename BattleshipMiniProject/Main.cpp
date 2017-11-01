@@ -10,22 +10,25 @@ using namespace std;
 
 //For testing SFML
 void drawWindow() {
+	int offSet = 10;
+	float windowWidth = 600;
+	float windowHeight = 600;
+	int rectWidth = (((windowWidth) - (9*offSet))/11);
+	int rectHeight =(((windowHeight) - (9*offSet))/11);
+	
 	// create the window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-	int Size = 10;
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
+	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
+
+
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
-		
-		sf::CircleShape shape(Size);
-		shape.setFillColor(sf::Color(100, 250, 50));
-		shape.setPosition(123,100);
+	
 		sf::Event event;
 		
-		if (Size < 400)
-		Size++;
-		
+
 		while (window.pollEvent(event))
 		{
 			// "close requested" event: we close the window
@@ -35,8 +38,15 @@ void drawWindow() {
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 
-		window.draw(shape);
-		// end the current frame
+		for (int x = 0; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
+		{
+			for (int y = 0; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
+				rectangle.setPosition(x, y);
+				window.draw(rectangle);
+			}
+		}
+		
+		window.draw(rectangle);// end the current frame
 		window.display();
 	}
 
