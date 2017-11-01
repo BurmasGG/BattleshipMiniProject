@@ -3,12 +3,68 @@
 #include<Winsock2.h>
 #include<qos.h>
 #pragma comment (lib, "ws2_32.lib")
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
 
 using namespace std;
 
+<<<<<<<
 int main()
+=======
+//For testing SFML
+void drawWindow() {
+	int offSet = 10;
+	float windowWidth = 600;
+	float windowHeight = 600;
+	int rectWidth = (((windowWidth) - (9*offSet))/11);
+	int rectHeight =(((windowHeight) - (9*offSet))/11);
+	
+	// create the window
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
+	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
+
+
+	// run the program as long as the window is open
+	while (window.isOpen())
+	{
+		// check all the window's events that were triggered since the last iteration of the loop
+	
+		sf::Event event;
+		
+
+		while (window.pollEvent(event))
+		{
+			// "close requested" event: we close the window
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+		// clear the window with black color
+		window.clear(sf::Color::Black);
+
+		for (int x = 0; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
+		{
+			for (int y = 0; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
+				rectangle.setPosition(x, y);
+				window.draw(rectangle);
+			}
+		}
+		
+		window.draw(rectangle);// end the current frame
+		window.display();
+	}
+
+}
+void main()
+>>>>>>>
 {
+<<<<<<<
 	cerr << "hej" << endl;
+=======
+	//SLET DRAWWINDOW() FOR AT KORE RESTEN AF PROGRAMMET 
+	drawWindow();
+	
+>>>>>>>
 	//initialize winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2); //request version 2,2
