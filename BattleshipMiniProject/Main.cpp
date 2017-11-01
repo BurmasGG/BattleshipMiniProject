@@ -14,17 +14,30 @@ int main()
 =======
 //For testing SFML
 void drawWindow() {
-	int offSet = 10;
+	sf::Font font;
+	if (!font.loadFromFile("BebasNeue.otf"))
+	{
+		// error...
+	}
+
 	float windowWidth = 600;
+	int offSet = 10;
 	float windowHeight = 600;
-	int rectWidth = (((windowWidth) - (9*offSet))/11);
-	int rectHeight =(((windowHeight) - (9*offSet))/11);
+	float rectWidth = (((windowWidth-10) - (10*offSet))/11);
+	float rectHeight =(((windowHeight-10) - (10*offSet))/11);
 	
 	// create the window
+
+
+
+
+
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
 	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
-
-
+	sf::Text text;
+	text.setCharacterSize(50);
+	text.setFillColor(sf::Color::Red);
+	text.setFont(font);
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
@@ -42,6 +55,22 @@ void drawWindow() {
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 
+		//For loop that draws the squares
+		{
+		for (int x = 7; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
+				window.draw(rectangle);
+				rectangle.setPosition(x, y);
+			for (int y = 7; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
+			}
+		}
+		
+		//For loop for drawing numbers on x
+		for (int i = 1; i <= 1; i++) {
+			text.setString("300");
+			sf::FloatRect textRect = text.getLocalBounds();
+			text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+			text.setPosition((rectWidth+offSet+7) / 2, (rectHeight+offSet+7) / 2);
+			window.draw(text);
 		for (int x = 0; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
 		{
 			for (int y = 0; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
@@ -51,6 +80,9 @@ void drawWindow() {
 		}
 		
 		window.draw(rectangle);// end the current frame
+		}
+
+		
 		window.display();
 	}
 
