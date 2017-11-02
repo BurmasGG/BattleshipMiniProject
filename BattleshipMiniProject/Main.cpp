@@ -27,6 +27,7 @@ void drawWindow() {
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
 	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
 	sf::Text text;
+	sf::Vector2i mousePos;
 	text.setCharacterSize(30);
 	text.setFillColor(sf::Color::Black);
 	text.setFont(font);
@@ -48,14 +49,24 @@ void drawWindow() {
 		window.clear(sf::Color::Black);
 
 		//For loop that draws the squares
-	
+		mousePos = sf::Mouse::getPosition(window);
+		
+		
+		
 			for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet) 
 			{
 					for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
 					{
 						rectangle.setPosition(x, y);
 						window.draw(rectangle);
+						sf::FloatRect rectbound = rectangle.getGlobalBounds();
+						if (rectbound.left<mousePos.x && rectbound.left + rectbound.width>mousePos.x && rectbound.top<mousePos.y && rectbound.top + rectbound.height>mousePos.y) {
+							cout <<"x: " + to_string(rectbound.left )+ " y: " + to_string(rectbound.top)<<endl;
+						}
 				
+	
+
+
 					}
 			}
 			int x =  3+ ((rectWidth + offSet) / 2)+( rectWidth + offSet);
@@ -86,11 +97,8 @@ void drawWindow() {
 
 			}
 
-
-				window.draw(rectangle);// end the current frame
 			
-
-
+			window.draw(rectangle);// end the current frame
 			window.display();
 		}
 
