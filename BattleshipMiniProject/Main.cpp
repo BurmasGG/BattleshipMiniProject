@@ -9,9 +9,6 @@
 
 using namespace std;
 
-<<<<<<<
-int main()
-=======
 //For testing SFML
 void drawWindow() {
 	sf::Font font;
@@ -57,10 +54,11 @@ void drawWindow() {
 
 		//For loop that draws the squares
 		{
-		for (int x = 7; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
+		for (int x = 7; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet) {
+			for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet) {
 				window.draw(rectangle);
 				rectangle.setPosition(x, y);
-			for (int y = 7; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
+			
 			}
 		}
 		
@@ -87,16 +85,12 @@ void drawWindow() {
 	}
 
 }
-void main()
->>>>>>>
+int main()
 {
-<<<<<<<
 	cerr << "hej" << endl;
-=======
 	//SLET DRAWWINDOW() FOR AT KORE RESTEN AF PROGRAMMET 
 	drawWindow();
 	
->>>>>>>
 	//initialize winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2); //request version 2,2
