@@ -27,8 +27,8 @@ void drawWindow() {
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
 	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
 	sf::Text text;
-	text.setCharacterSize(50);
-	text.setFillColor(sf::Color::Red);
+	text.setCharacterSize(30);
+	text.setFillColor(sf::Color::Black);
 	text.setFont(font);
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -48,22 +48,44 @@ void drawWindow() {
 		window.clear(sf::Color::Black);
 
 		//For loop that draws the squares
-		
-			for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet) {
-				for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet) {
-					rectangle.setPosition(x, y);
-					window.draw(rectangle);
-				}
+	
+			for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet) 
+			{
+					for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
+					{
+						rectangle.setPosition(x, y);
+						window.draw(rectangle);
+				
+					}
 			}
+			int x =  3+ ((rectWidth + offSet) / 2)+( rectWidth + offSet);
+			for (int i = 1; i <= 10; i++) 
+			{
+				int y =(3+(rectHeight + offSet)/2);
+				
+					text.setString(to_string(i));
+					sf::FloatRect textRect = text.getLocalBounds();
+					text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+					text.setPosition(x,y);
+					window.draw(text);
+					x += rectWidth + offSet;
+			}
+			string letters[10] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+			int y = 3 + ((rectHeight + offSet) / 2) + (rectHeight + offSet);
+			for (int i = 0; i<10; i++) 
+			{
+				string letter = letters[i];
 
-			//For loop for drawing numbers on x
-			for (int i = 1; i <= 1; i++) {
-				text.setString("300");
+				int x = (3 + (rectHeight + offSet) / 2);
+				text.setString(letter);
 				sf::FloatRect textRect = text.getLocalBounds();
 				text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-				text.setPosition((rectWidth + offSet + 7) / 2, (rectHeight + offSet + 7) / 2);
+				text.setPosition(x, y);
 				window.draw(text);
+				y += rectWidth + offSet;
+
 			}
+
 
 				window.draw(rectangle);// end the current frame
 			
@@ -78,7 +100,7 @@ void drawWindow() {
 {
 	//cerr << "hej" << endl;
 	//SLET DRAWWINDOW() FOR AT KORE RESTEN AF PROGRAMMET 
-	//drawWindow();
+	drawWindow();
 	
 	//initialize winsock
 	WSADATA wsData;
