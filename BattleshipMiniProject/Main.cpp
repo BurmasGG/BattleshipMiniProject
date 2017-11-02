@@ -20,15 +20,10 @@ void drawWindow() {
 	float windowWidth = 600;
 	int offSet = 10;
 	float windowHeight = 600;
-	float rectWidth = (((windowWidth-10) - (10*offSet))/11);
-	float rectHeight =(((windowHeight-10) - (10*offSet))/11);
-	
+	float rectWidth = (((windowWidth - 10) - (10 * offSet)) / 11);
+	float rectHeight = (((windowHeight - 10) - (10 * offSet)) / 11);
+
 	// create the window
-
-
-
-
-
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
 	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
 	sf::Text text;
@@ -39,9 +34,9 @@ void drawWindow() {
 	while (window.isOpen())
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
-	
+
 		sf::Event event;
-		
+
 
 		while (window.pollEvent(event))
 		{
@@ -53,43 +48,37 @@ void drawWindow() {
 		window.clear(sf::Color::Black);
 
 		//For loop that draws the squares
-		{
-		for (int x = 7; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet) {
-			for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet) {
-				window.draw(rectangle);
-				rectangle.setPosition(x, y);
+		
+			for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet) {
+				for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet) {
+					rectangle.setPosition(x, y);
+					window.draw(rectangle);
+				}
+			}
+
+			//For loop for drawing numbers on x
+			for (int i = 1; i <= 1; i++) {
+				text.setString("300");
+				sf::FloatRect textRect = text.getLocalBounds();
+				text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+				text.setPosition((rectWidth + offSet + 7) / 2, (rectHeight + offSet + 7) / 2);
+				window.draw(text);
+			}
+
+				window.draw(rectangle);// end the current frame
 			
-			}
-		}
-		
-		//For loop for drawing numbers on x
-		for (int i = 1; i <= 1; i++) {
-			text.setString("300");
-			sf::FloatRect textRect = text.getLocalBounds();
-			text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-			text.setPosition((rectWidth+offSet+7) / 2, (rectHeight+offSet+7) / 2);
-			window.draw(text);
-		for (int x = 0; x < windowWidth-rectWidth+offSet; x += rectWidth + offSet)
-		{
-			for (int y = 0; y < windowHeight-rectWidth+offSet; y += rectHeight + offSet) {
-				rectangle.setPosition(x, y);
-				window.draw(rectangle);
-			}
-		}
-		
-		window.draw(rectangle);// end the current frame
+
+
+			window.display();
 		}
 
-		
-		window.display();
 	}
 
-}
-int main()
+	int main()
 {
-	cerr << "hej" << endl;
+	//cerr << "hej" << endl;
 	//SLET DRAWWINDOW() FOR AT KORE RESTEN AF PROGRAMMET 
-	drawWindow();
+	//drawWindow();
 	
 	//initialize winsock
 	WSADATA wsData;
