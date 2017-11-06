@@ -33,7 +33,17 @@ void drawWindow() {
 	text.setCharacterSize(30);
 	text.setFillColor(sf::Color::Black);
 	text.setFont(font);
-	// run the program as long as the window is open
+	std::vector<sf::RectangleShape> rectangleVector ;
+	//Make the position of the rectangles
+	for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet)
+	{
+		for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
+		{
+			rectangle.setPosition(x, y);
+			rectangleVector.push_back(rectangle);
+		}
+	}
+	// run the program a long as the window is open
 	while (window.isOpen())
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
@@ -49,28 +59,34 @@ void drawWindow() {
 		}
 		// clear the window with black color
 		window.clear(sf::Color::Black);
+		
 
 		//For loop that draws the squares
 		mousePos = sf::Mouse::getPosition(window);
 		
 		
 		
-			for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet) 
+		
+
+			for (int i = 0; i < rectangleVector.size(); i++)
 			{
-					for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
-					{
-						rectangle.setPosition(x, y);
-						
-						sf::FloatRect rectbound = rectangle.getGlobalBounds();
-						if (rectbound.left<mousePos.x && rectbound.left + rectbound.width>mousePos.x && rectbound.top<mousePos.y && rectbound.top + rectbound.height>mousePos.y) {
-							cout <<"x: " + to_string(rectbound.left )+ " y: " + to_string(rectbound.top)<<endl;
-						}
-				
-						window.draw(rectangle);
+				sf::FloatRect rectbound = rectangleVector[i].getGlobalBounds();
+				if (rectbound.left<mousePos.x && rectbound.left + rectbound.width>mousePos.x && rectbound.top<mousePos.y && rectbound.top + rectbound.height>mousePos.y) {
+					//cout << "x: " + to_string(rectbound.left) + " y: " + to_string(rectbound.top) << endl;
+					cout << to_string(i) <<endl;
+					rectangleVector[i].setFillColor(sf::Color::Red);
+				}
+				else
+				{
+					rectangleVector[i].setFillColor(sf::Color::White);
+				}
+			
 
+				window.draw(rectangleVector[i]);
 
-					}
 			}
+			
+			
 			int x =  3+ ((rectWidth + offSet) / 2)+( rectWidth + offSet);
 			for (int i = 1; i <= 10; i++) 
 			{
@@ -99,8 +115,6 @@ void drawWindow() {
 
 			}
 
-			
-			//window.draw(rectangle);// end the current frame
 			window.display();
 		}
 
@@ -108,7 +122,7 @@ void drawWindow() {
 
 	int main()
 {
-	//cerr << "hej" << endl;
+
 	//SLET DRAWWINDOW() FOR AT KORE RESTEN AF PROGRAMMET 
 	drawWindow();
 	
