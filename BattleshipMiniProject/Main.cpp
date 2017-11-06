@@ -6,8 +6,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-
 using namespace std;
+
+enum States {NILL, SHIP, DAMAGEDSHIP};
+
 
 //For testing SFML
 void drawWindow() {
@@ -58,13 +60,13 @@ void drawWindow() {
 					for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
 					{
 						rectangle.setPosition(x, y);
-						window.draw(rectangle);
+						
 						sf::FloatRect rectbound = rectangle.getGlobalBounds();
 						if (rectbound.left<mousePos.x && rectbound.left + rectbound.width>mousePos.x && rectbound.top<mousePos.y && rectbound.top + rectbound.height>mousePos.y) {
 							cout <<"x: " + to_string(rectbound.left )+ " y: " + to_string(rectbound.top)<<endl;
 						}
 				
-	
+						window.draw(rectangle);
 
 
 					}
@@ -98,7 +100,7 @@ void drawWindow() {
 			}
 
 			
-			window.draw(rectangle);// end the current frame
+			//window.draw(rectangle);// end the current frame
 			window.display();
 		}
 
@@ -208,3 +210,4 @@ void drawWindow() {
 		WSACleanup();
 		return 0;
 	}
+
