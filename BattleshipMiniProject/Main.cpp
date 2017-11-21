@@ -40,11 +40,11 @@ void drawWindow() {
 	text.setCharacterSize(30);
 	text.setFillColor(sf::Color::Black);
 	text.setFont(font);
-	
 	sf::Vector2i mousePos;
 	
 	
 	//Make the position of the rectangles and save them into a vector
+	
 	for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet)
 	{
 		for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
