@@ -16,25 +16,35 @@ void drawWindow() {
 	sf::Font font;
 	if (!font.loadFromFile("BebasNeue.otf"))
 	{
-		// error...
+		cout << "cannot load font" << endl;
 	}
 
+	//Set width and height for the window
 	float windowWidth = 600;
-	int offSet = 10;
 	float windowHeight = 600;
+	
+	//Set the offset 
+	int offSet = 10;
+	
+	//Calculate the rect width and height
 	float rectWidth = (((windowWidth - 10) - (10 * offSet)) / 11);
 	float rectHeight = (((windowHeight - 10) - (10 * offSet)) / 11);
 
 	// create the window
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
+	
 	sf::RectangleShape rectangle(sf::Vector2f(rectWidth, rectHeight));
+	std::vector<sf::RectangleShape> rectangleVector;
+	
 	sf::Text text;
-	sf::Vector2i mousePos;
 	text.setCharacterSize(30);
 	text.setFillColor(sf::Color::Black);
 	text.setFont(font);
-	std::vector<sf::RectangleShape> rectangleVector ;
-	//Make the position of the rectangles
+	
+	sf::Vector2i mousePos;
+	
+	
+	//Make the position of the rectangles and save them into a vector
 	for (int x = 7; x < windowWidth - rectWidth + offSet; x += rectWidth + offSet)
 	{
 		for (int y = 7; y < windowHeight - rectWidth + offSet; y += rectHeight + offSet)
@@ -43,11 +53,11 @@ void drawWindow() {
 			rectangleVector.push_back(rectangle);
 		}
 	}
+	
 	// run the program a long as the window is open
 	while (window.isOpen())
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
-
 		sf::Event event;
 
 
@@ -60,19 +70,18 @@ void drawWindow() {
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 		
+		//Get the position of the mouse
+		mousePos = sf::Mouse::getPosition(window);
 
 		//For loop that draws the squares
-		mousePos = sf::Mouse::getPosition(window);
 		
-		
-		
-		
-
 			for (int i = 0; i < rectangleVector.size(); i++)
 			{
 				sf::FloatRect rectbound = rectangleVector[i].getGlobalBounds();
+				
+				/*Tjecks if the mouse is with-in the rectangle if it change the color to red
+				else it fills it with white*/
 				if (rectbound.left<mousePos.x && rectbound.left + rectbound.width>mousePos.x && rectbound.top<mousePos.y && rectbound.top + rectbound.height>mousePos.y) {
-					//cout << "x: " + to_string(rectbound.left) + " y: " + to_string(rectbound.top) << endl;
 					cout << to_string(i) <<endl;
 					rectangleVector[i].setFillColor(sf::Color::Red);
 				}
